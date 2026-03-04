@@ -1,22 +1,22 @@
 # DSA
 This repo contains the source files of the DSA assignment 2
 
-To ensure compatibility of each module please follow these naming conventions:
+To ensure compatibility of each module please **follow** these naming conventions:
 
-*Structs & Typedef -> PascaleCase
-    ex: 
-    typedef struct StudentRecord{
-        //values
+<p>*Structs & Typedef -> PascaleCase<br>
+    ex: <br>
+    typedef struct StudentRecord{<br>
+        //values<br>
     } StudentRecord;
-
-*Functions -> module_snake_case()  ;Start every function with the module name.
-    ex:
-        catalog_sort_games()
-        cart_add_item()
-
-*Constants -> UPPER_SNAKE_CASE
-    ex:
+</p>
+<p>*Functions -> module_snake_case()  ;Start every function with the module name.<br>
+    ex:<br>
+        catalog_sort_games()<br>
+        cart_add_item()<br>
+</p>
+<p>*Constants -> UPPER_SNAKE_CASE<br>
+    ex:<br>
         #define MAX 100
-
-!!ALWAYS free the memory after using malloc or calloc!!
-!!ALWAYS write good comments!!
+</p>
+<p>!!ALWAYS free the memory after using malloc or calloc!!</p>
+<p>!!ALWAYS write good comments!!</p>
