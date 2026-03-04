@@ -53,3 +53,12 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# OS Generated Junk
+
+.DS_Store
+.DS_Store?
+._*
+
+# VS Code Local Settings
+.vscode/
