@@ -1,22 +1,82 @@
-# DSA
-This repo contains the source files of the DSA assignment 2
+# 🎮 CLI Game Store — DSA Assignment 2
 
-To ensure compatibility of each module please **follow** these naming conventions:
+This repo contains the source files of the DSA Assignment 2.
 
-<p>*Structs & Typedef -> PascaleCase<br>
-    ex: <br>
-    typedef struct StudentRecord{<br>
-        //values<br>
-    } StudentRecord;
-</p>
-<p>*Functions -> module_snake_case()  ;Start every function with the module name.<br>
-    ex:<br>
-        catalog_sort_games()<br>
-        cart_add_item()<br>
-</p>
-<p>*Constants -> UPPER_SNAKE_CASE<br>
-    ex:<br>
-        #define MAX 100
-</p>
-<p>!!ALWAYS free the memory after using malloc or calloc!!</p>
-<p>!!ALWAYS write good comments!!</p>
+---
+
+## 📁 Project Structure
+
+```
+DSA/
+│
+├── include/            # All header files (.h)
+│   ├── common.h
+│   ├── catalog.h
+│   ├── cart.h
+│   ├── download.h
+│   ├── navigation.h
+│   ├── library.h
+│   ├── wishlist.h
+│   └── support.h
+│
+├── src/                # All source files (.c)
+│   ├── main.c
+│   ├── catalog.c
+│   ├── cart.c
+│   ├── download.c
+│   ├── navigation.c
+│   ├── library.c
+│   ├── wishlist.c
+│   └── support.c
+│
+└── README.md
+```
+
+---
+
+## ▶️ How to Run
+
+```bash
+gcc src/*.c -Iinclude -o gamestore
+./gamestore
+```
+
+---
+
+## 📐 Naming Conventions
+
+To ensure compatibility of each module please follow these naming conventions:
+
+**Structs & Typedef → PascalCase**
+```c
+typedef struct StudentRecord {
+    // values
+} StudentRecord;
+```
+
+**Functions → module_snake_case()**
+
+Start every function with the module name.
+```c
+catalog_sort_games()
+cart_add_item()
+```
+
+**Variables → camelCase**
+```c
+int gameCount;
+float totalPrice;
+```
+
+**Constants → UPPER_SNAKE_CASE**
+```c
+#define MAX 100
+```
+
+---
+
+## ⚠️ Rules
+
+**!!ALWAYS free the memory after using `malloc` or `calloc`!!**
+
+**!!ALWAYS write good comments!!**
