@@ -4,11 +4,19 @@
 
 int main()
 {
+    
+    Catalog catalog ={0};
+    Catalog *ptrCatalog = &catalog;
+    catalog_init(ptrCatalog);
+    Game *gameArray = catalog_get_game(ptrCatalog);
+    catalog_sort_by_rating(ptrCatalog);
 
-    catalog_init();
-    printf("hello\n");
-    catalog_print_games();
+    for (int i = 0; i < ptrCatalog->gameCount; i++)
+    {
+        {
+            printf("%s , %.2f\n", gameArray[i].title, gameArray[i].rating);
+        }
+    }
 
-    printf("hello\n");
-    return 0;
+        return 0;
 }

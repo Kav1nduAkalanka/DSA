@@ -2,11 +2,17 @@
 #define CATALOG_H
 #include "common.h"
 
-extern Game storeCatalog[3]; // Tell the program there is a catalog array somewhere
+typedef struct
+{
+    Game games[20];
+    int gameCount;
+} Catalog;
 
-void catalog_init();        // initialize the catalog
-void catalog_print_games(); // displays the whole catalog
-void sort_by_price_low();   // sort the catalog from price low to high
-void sort_by_rating_low();  // sort the catalog from ratings low to high
+void catalog_init(Catalog *catalog);
+Game *catalog_get_game(Catalog *catalog);
+void catalog_sort_by_price(Catalog *catalog);
+void catalog_sort_by_rating(Catalog *catalog);
+Game *catalog_search_by_id(Catalog *catalog,int id);
+int catalog_get_count(Catalog *catalog);
 
 #endif

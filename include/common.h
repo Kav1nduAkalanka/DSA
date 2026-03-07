@@ -1,14 +1,39 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#define MAX_STR_LEN 100 
-#define STORE_NAME "test" //change the store name later
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct{
-    int game_id;
-    char title[MAX_STR_LEN];
+#define MAX_TITLE_LEN 100     // max length of a game title
+#define MAX_CATALOG_SIZE 20   // max game catalog size
+#define INITIAL_LIBRARY_CAP 5 // library size at the initialization
+
+typedef enum
+{
+    PAGE_MAIN_MENU,
+    PAGE_CATALOG,
+    PAGE_CART,
+    PAGE_DOWNLOAD,
+    PAGE_LIBRARY,
+    PAGE_FAVOURITES,
+    PAGE_SUPPORT,
+    PAGE_CHECKOUT,
+    PAGE_EXIT
+} Page;
+
+typedef enum
+{
+    PRIORITY_LOW,
+    PRIORITY_MEDIUM,
+    PRIORITY_HIGH
+} Priority;
+
+typedef struct
+{
+    int gameID;
+    char title[MAX_TITLE_LEN];
     float price;
-    float rating;
-}Game;
+    float rating; // 0.0 to 5.0
+} Game;
 
 #endif
