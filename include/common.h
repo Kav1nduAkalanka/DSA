@@ -28,12 +28,13 @@ typedef enum
     PRIORITY_HIGH
 } Priority;
 
-typedef struct
+typedef struct 
 {
     int gameID;
     char title[MAX_TITLE_LEN];
     float price;
     float rating; // 0.0 to 5.0
+    float size; //game size in GB
 } Game;
 
 #endif
