@@ -6,7 +6,7 @@
 
 #define MAX_TITLE_LEN 100     // max length of a game title
 #define MAX_CATALOG_SIZE 20   // max game catalog size
-#define INITIAL_LIBRARY_CAP 5 // library size at the initialization
+int  INITIAL_LIBRARY_CAP = 5; // library size at the initialization
 
 typedef enum
 {
@@ -27,6 +27,13 @@ typedef enum
     PRIORITY_MEDIUM,
     PRIORITY_HIGH
 } Priority;
+
+typedef enum{
+    KEYWORD_MONEY,
+    KEYWORD_LOGIN,
+    KEYWORD_CRASH,
+    KEYWORD_GENERAL
+}KeyWord;
 
 typedef struct 
 {

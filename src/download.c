@@ -87,7 +87,7 @@ Game *download_peek(DownloadQueue *queue)
 {
     if (download_is_empty(queue))
     {
-        return;
+        return NULL;
     }
     return &queue->front->game;
 }
