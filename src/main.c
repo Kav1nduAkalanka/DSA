@@ -1,54 +1,41 @@
 #include <stdio.h>
-#include "common.h"
+/*#include "common.h"
 #include "catalog.h"
 #include "cart.h"
-#include "download.h"
+#include "download.h"*/
 #include <stdbool.h>
+#include <stdlib.h> //system("cls") on windows
+#include <windows.h> //Sleep(time in seconds)
+
+void show_main_menu();
+
 int main()
 {
+    int running = 1;
+    int userInput = 0;
 
-    Catalog catalog = {0};
-    Catalog *ptrCatalog = &catalog;
-    catalog_init(ptrCatalog);
-    Game *gameArray = catalog_get_game(ptrCatalog);
-    catalog_sort_by_rating(ptrCatalog);
-
-    for (int i = 0; i < ptrCatalog->gameCount; i++)
-    {
-        {
-            printf("%s , %.2f\n", gameArray[i].title, gameArray[i].price);
+    while(running){
+        show_main_menu();
+        if(scanf("%d",&userInput) != 1){
+            userInput = -1;
         }
     }
 
-    Game *game1 = catalog_get_game(&catalog);
-    Game *game2 = catalog_search_by_id(&catalog, 103);
-
-    Cart playerCart;
-    cart_init(&playerCart);
-    cart_add_game(&playerCart, game1);
-    cart_add_game(&playerCart, game2);
-
-    float price = cart_get_total_price(&playerCart);
-    printf("price: %.2f", price);
-
-    DownloadQueue queue = {0};
-
-    download_init_queue(&queue);
-
-    if (download_is_empty(&queue))
-    {
-        printf("\nqueue is empty\n");
-    }
-
-    Game *game3 = catalog_search_by_id(&catalog, 102);
-    download_enqueue(&queue, game3);
-
-    if (!download_is_empty(&queue))
-    {
-        printf("queue is not empty");
-    }
-
-    download_peek(&queue);
-
     return 0;
 }
+
+void show_main_menu(){
+    printf("==================================================\n");
+    printf("                 GAME STORE\n");
+    printf("==================================================\n");
+    printf("Welcome, Player!\n\n");
+    printf("[1] Browse Catalog\n");
+    printf("[2] View Cart\n");
+    printf("[3] Downloads(Downloading: %d )\n", 10);
+    printf("[4] Library\n");
+    printf("[5] Wishlist\n");
+    printf("[6] Support\n\n");
+    printf("--------------------------------------------------\n");
+    printf("Enter your choice: ");
+}
+
