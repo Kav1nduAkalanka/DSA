@@ -8,24 +8,27 @@
 #define MAX_CATALOG_SIZE 20   // max game catalog size
 #define  INITIAL_LIBRARY_CAP 5 // library size at the initialization
 
+//used to easily identify the page
 typedef enum
 {
-    PAGE_EXIT,
-    PAGE_CATALOG,
-    PAGE_CART,
-    PAGE_LIBRARY,
-    PAGE_DOWNLOAD,
-    PAGE_WISHLIST,
-    PAGE_SUPPORT,
-    PAGE_MAIN_MENU
+    PAGE_EXIT,      //0
+    PAGE_CATALOG,   //1
+    PAGE_CART,      //2
+    PAGE_LIBRARY,   //3
+    PAGE_DOWNLOAD,  //4
+    PAGE_WISHLIST,  //5
+    PAGE_SUPPORT,   //6    
+    PAGE_MAIN_MENU  //7    
 } Page;
 
+//to identify the priority level of the ticket
 typedef enum
 {
-    PRIORITY_LOW,
-    PRIORITY_MEDIUM,
-    PRIORITY_HIGH
+    PRIORITY_LOW, //0
+    PRIORITY_MEDIUM, //1
+    PRIORITY_HIGH //2
 } Priority;
+
 
 typedef enum{
     KEYWORD_MONEY,
@@ -34,6 +37,7 @@ typedef enum{
     KEYWORD_GENERAL
 }KeyWord;
 
+//structure of the Game
 typedef struct 
 {
     int gameID;
