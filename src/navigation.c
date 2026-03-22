@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "navigation.h"
 
 NavStackNode *nav_create_node(Page currentPage)
@@ -13,7 +14,7 @@ void nav_init(NavStack *nav)
 }
 int nav_is_empty(NavStack *nav)
 {
-    if (nav == NULL)
+    if (nav == NULL || nav->top == NULL)
     {
         return 1;
     }
@@ -22,15 +23,10 @@ int nav_is_empty(NavStack *nav)
 void nav_push(NavStack *nav, Page currentPage)
 {
     NavStackNode *newNode = (NavStackNode *)malloc(sizeof(NavStackNode));
-    if (nav_is_empty(nav))
-    {
+    if (newNode == NULL){
         return;
     }
-
-    if (nav->top == NULL)
-    {
-        nav->top = newNode;
-    }
+    newNode->page = currentPage;    
 
     newNode->next = nav->top;
     nav->top = newNode;
@@ -47,25 +43,21 @@ void nav_pop(NavStack *nav)
     NavStackNode *temp = nav->top;
     nav->top = nav->top->next;
     free(temp);
+    nav->stackCount--;
 }
 
 Page nav_peek(NavStack *nav)
 {
+    if(nav_is_empty(nav)){
+        return PAGE_MAIN_MENU;
+    }
     return nav->top->page;
 }
 
 void nav_destroy(NavStack *nav)
 {
 
-    if (nav_is_empty(nav))
-    {
-        return;
-    }
-    NavStackNode *current = nav->top;
-    while (current != NULL)
-    {
-        NavStackNode *temp = current->next;
-        free(current);
-        current = temp;
+    while(!nav_is_empty(nav)){
+        nav_pop(nav);
     }
 }

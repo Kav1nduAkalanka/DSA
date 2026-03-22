@@ -22,6 +22,7 @@ void catalog_add_game(Catalog *catalog, int id, const char *title, float price, 
 // initialization of the catalog
 void catalog_init(Catalog *catalog)
 {
+    catalog->gameCount = 0;
     catalog_add_game(catalog, 101, "Red Dead Redemption 2", 59.99, 4.9, 10);
     catalog_add_game(catalog, 102, "Elden Ring", 59.99, 4.8, 11);
     catalog_add_game(catalog, 103, "Metal Gear Solid V: The Phantom Pain", 19.99, 4.7, 5);
@@ -114,4 +115,9 @@ Game *catalog_search_by_id(Catalog *catalog, int id)
 int catalog_get_count(Catalog *catalog)
 {
     return catalog->gameCount;
+}
+
+void catalog_destroy(Catalog *catalog) {
+   
+    catalog->gameCount = 0; 
 }

@@ -12,7 +12,7 @@ struct CartNode
     CartNode *prev;
 };
 
-typedef struct
+typedef struct Cart
 {
     CartNode *head;
     CartNode *tail;
@@ -31,4 +31,4 @@ CartNode *cart_get_items(Cart *cart);
 void cart_clear(Cart *cart);
 void cart_destroy(Cart *cart);
 
-#endif
+#endif 

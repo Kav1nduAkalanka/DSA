@@ -113,17 +113,3 @@ void support_queue_destroy(priorityQueue *q)
     }
     q->count = 0;
 }
-
-int main()
-{
-    priorityQueue q;
-    support_queue_initialize(&q);
-    support_queue_demo(&q);
-    support_queue_resolve_next(&q);
-    support_queue_peek_next(&q);
-
-
-    printf("Ticket count: %d\n", support_queue_get_count(&q));
-
-    return 0;
-}
