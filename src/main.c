@@ -6,6 +6,7 @@ Hasindu -->
 Wathsalya -->
 Gimhana -->
 Parichitha -->
+Nimsara -->
 
 <--NOTE-->
 
@@ -32,7 +33,7 @@ Parichitha -->
     --> gcc src/*.c -I include -o gamestore
     --> .\gamestore
 
-
+    **Priority queue implementation is not finished.but the logic is there.**
 
 */
 
