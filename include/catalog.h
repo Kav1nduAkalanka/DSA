@@ -15,4 +15,5 @@ void catalog_sort_by_rating(Catalog *catalog);
 Game *catalog_search_by_id(Catalog *catalog,int id);
 int catalog_get_count(Catalog *catalog);
 void catalog_destroy(Catalog *catalog);
+void catalog_destroy(Catalog *catalog);
 #endif

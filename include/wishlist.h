@@ -1,31 +1,38 @@
 #ifndef WISHLIST_H
 #define WISHLIST_H
-#include<stdio.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include "common.h"
 
-typedef struct wishlistNode
+typedef struct WishlistNode
 {
     Game game;
-    struct wishlistNode *next;
-}wishlistNode;
+    struct WishlistNode *next;
+} WishlistNode;
 
-typedef struct wishlist
+typedef struct Wishlist
 {
-    wishlistNode *head;
-    wishlistNode *tail;
+    WishlistNode *head;
+    WishlistNode *tail;
     int count;
-}wishlist;
+} Wishlist;
 
-wishlistNode* createNode(Game *game);
+WishlistNode *createNode(Game *game);
+
+void wishlsit_init(Wishlist *wishlist);
+
 void wishlist_display_main_menu();
-void wishlist_display_contains(wishlist *wishlist);
-int wishlist_isEmpty(wishlist *wishlist);
-void wishlist_insert_new_item( wishlist *wishlist,  Game *game);
-wishlistNode* wishlist_search_game_by_id(wishlist *wishlist,int ID);
-void wishlist_remove_itemb_by_id(wishlist *wishlist, int removeID);
 
+void wishlist_display_contains(Wishlist *wishlist);
+
+int wishlist_isEmpty(Wishlist *wishlist);
+
+void wishlist_insert_new_item(Wishlist *wishlist, Game *game);
+
+WishlistNode *wishlist_search_game_by_id(Wishlist *wishlist, int ID);
+
+void wishlist_remove_item_by_id(Wishlist *wishlist, int removeID);
+
+void wishlist_destroy(Wishlist *wishlist);
 
 #endif
-
-

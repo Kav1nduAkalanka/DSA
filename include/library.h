@@ -17,4 +17,4 @@ Game *lib_get_game_data(Library *library, int gameID);
 int lib_get_count(Library *library);
 void lib_destroy(Library *library);
 
-#endif
+#endif 

@@ -6,19 +6,18 @@
 
 #define MAX_TITLE_LEN 100     // max length of a game title
 #define MAX_CATALOG_SIZE 20   // max game catalog size
-int  INITIAL_LIBRARY_CAP = 5; // library size at the initialization
+#define  INITIAL_LIBRARY_CAP 5 // library size at the initialization
 
 typedef enum
 {
-    PAGE_MAIN_MENU,
+    PAGE_EXIT,
     PAGE_CATALOG,
     PAGE_CART,
-    PAGE_DOWNLOAD,
     PAGE_LIBRARY,
-    PAGE_FAVOURITES,
+    PAGE_DOWNLOAD,
+    PAGE_WISHLIST,
     PAGE_SUPPORT,
-    PAGE_CHECKOUT,
-    PAGE_EXIT
+    PAGE_MAIN_MENU
 } Page;
 
 typedef enum
