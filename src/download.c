@@ -1,6 +1,7 @@
 #include "download.h"
 #include "common.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 // The header file defined for the donwload manager
 
@@ -93,7 +94,7 @@ Game *download_peek(DownloadQueue *queue)
 }
 
 void download_queue_destroy(DownloadQueue *queue){
-    if (queue->front = NULL){
+    if (queue->front == NULL){
         return;
     }
 

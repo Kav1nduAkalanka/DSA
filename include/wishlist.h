@@ -19,7 +19,7 @@ typedef struct Wishlist
 
 WishlistNode *createNode(Game *game);
 
-void wishlsit_init(Wishlist *wishlist);
+void wishlist_init(Wishlist *wishlist);
 
 void wishlist_display_main_menu();
 
@@ -29,7 +29,7 @@ int wishlist_isEmpty(Wishlist *wishlist);
 
 void wishlist_insert_new_item(Wishlist *wishlist, Game *game);
 
-WishlistNode *wishlist_search_game_by_id(Wishlist *wishlist, int ID);
+Game *wishlist_search_game_by_id(Wishlist *wishlist, int ID);
 
 void wishlist_remove_item_by_id(Wishlist *wishlist, int removeID);
 

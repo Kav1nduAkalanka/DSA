@@ -5,13 +5,6 @@
 #include "support.h"
 
 
-//Initialize the support queue
-void support_queue_initialize(priorityQueue *q)
-{
-    q->front = NULL;
-    q->count = 0;
-}
-
 
 //Add a ticket and sorting them according to the priority 
 void support_queue_submit_ticket(priorityQueue *q, int ticketID, char ticketTitle[], int priority)
@@ -45,9 +38,11 @@ void support_queue_submit_ticket(priorityQueue *q, int ticketID, char ticketTitl
 
 
 
-//Create the support queue
-void support_queue_demo(priorityQueue *q)
+//Inialize the support queue
+void support_queue_initialize(priorityQueue *q)
 {
+    q->count=0;
+    q->front = NULL;
     support_queue_submit_ticket(q, 1, "Help to add", 2);
     support_queue_submit_ticket(q, 2, "Help to remove", 1);
     support_queue_submit_ticket(q, 3, "Help to pop", 5);
@@ -58,6 +53,7 @@ void support_queue_demo(priorityQueue *q)
     support_queue_submit_ticket(q, 8, "Help to blaa blaa", 8);
     support_queue_submit_ticket(q, 9, "Hhee hee", 9);
 }
+
 
 
 //Remove the highest priority ticket first
@@ -113,3 +109,4 @@ void support_queue_destroy(priorityQueue *q)
     }
     q->count = 0;
 }
+

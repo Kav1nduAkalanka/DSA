@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "cart.h"
 #include "common.h"
+#include <stdlib.h>
 
 void cart_init(Cart *cart)
 {
@@ -149,7 +150,7 @@ void cart_clear(Cart *cart)
 
         nextNode = current->next;
         free(current);
-        current->next = nextNode;
+        current = nextNode;
     }
 
     cart->head = NULL;

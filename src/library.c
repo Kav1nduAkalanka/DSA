@@ -34,7 +34,7 @@ void lib_add_game(Library *library, Game *inputGame)
         library->game = temp;
     }
 
-    library->gameCount += 1;
+    library->gameCount ++;
     int index = library->gameCount - 1;
     library->game[index].gameID = inputGame->gameID;
     library->game[index].price = inputGame->price;
@@ -87,7 +87,7 @@ void lib_remove_game_by_id(Library *library, int id)
 
 Game *lib_get_game_data(Library *library, int id)
 {
-    int index = lib_is_id_contains(library, id);
+    int index = lib_game_index(library,id);
     if (index == -1)
     {
         printf("invalid ID(%d)\n", id);

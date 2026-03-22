@@ -6,7 +6,7 @@
 #include "wishlist.h"
 
 // Initialize the wishlist
-void wishlsit_init(Wishlist *wishlist)
+void wishlist_init(Wishlist *wishlist)
 {
     wishlist->head = NULL;
     wishlist->tail = NULL;
@@ -60,14 +60,14 @@ void wishlist_insert_new_item(Wishlist *wishlist, Game *game)
 }
 
 // Search Items in Wishlist
-WishlistNode *wishlist_search_game_by_id(Wishlist *wishlist, int ID)
+Game *wishlist_search_game_by_id(Wishlist *wishlist, int ID)
 {
     WishlistNode *curr = wishlist->head;
     while (curr != NULL)
     {
         if (curr->game.gameID == ID)
         {
-            return curr;
+            return &curr->game;
         }
         curr = curr->next;
     }

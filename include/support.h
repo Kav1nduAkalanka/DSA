@@ -23,12 +23,11 @@ typedef struct priorityQueue
 } priorityQueue;
 
 
-void support_queue_initialize(priorityQueue *q);
 void support_queue_submit_ticket(priorityQueue *q,int ticketID,char ticketTitle[],int priority);
 void support_queue_resolve_next(priorityQueue *q);
 void support_queue_peek_next(priorityQueue *q);
 int support_queue_get_count(priorityQueue *q);
 void support_queue_destroy(priorityQueue *q);
-void support_queue_demo(priorityQueue *q);
+void support_queue_initialize(priorityQueue *q);
 
-#endif  
+#endif
