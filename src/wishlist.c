@@ -5,7 +5,7 @@
 #include "common.h"
 #include "wishlist.h"
 
-// Initialize the wishlist
+// setup wishlist
 void wishlist_init(Wishlist *wishlist)
 {
     wishlist->head = NULL;
@@ -13,7 +13,7 @@ void wishlist_init(Wishlist *wishlist)
     wishlist->count = 0;
 }
 
-// Create New Node
+// create a new node
 WishlistNode *createNode(Game *game)
 {
     WishlistNode *newNode = (WishlistNode *)malloc(sizeof(WishlistNode));
@@ -22,7 +22,7 @@ WishlistNode *createNode(Game *game)
     return newNode;
 }
 
-// Check Empty of the wishlist
+// is empty check
 int wishlist_isEmpty(Wishlist *wishlist)
 {
 
@@ -38,7 +38,7 @@ int wishlist_isEmpty(Wishlist *wishlist)
     }
 }
 
-// Add New items to wishlist
+// add game to list
 void wishlist_insert_new_item(Wishlist *wishlist, Game *game)
 {
     WishlistNode *newNode = createNode(game);
@@ -59,7 +59,7 @@ void wishlist_insert_new_item(Wishlist *wishlist, Game *game)
     printf("Added Successfully\n");
 }
 
-// Search Items in Wishlist
+// find game by id
 Game *wishlist_search_game_by_id(Wishlist *wishlist, int ID)
 {
     WishlistNode *curr = wishlist->head;
@@ -91,7 +91,7 @@ void wishlist_remove_item_by_id(Wishlist *wishlist, int removeID)
         return;
     }
 
-    // delete first node
+    // remove first element
     if (temp == wishlist->head)
     {
         wishlist->head = temp->next;
@@ -101,7 +101,7 @@ void wishlist_remove_item_by_id(Wishlist *wishlist, int removeID)
         prev->next = temp->next; // In middle
     }
 
-    // update tail if last node deleted
+    // fix tail pointer
     if (temp == wishlist->tail)
     {
         wishlist->tail = prev;
@@ -113,7 +113,7 @@ void wishlist_remove_item_by_id(Wishlist *wishlist, int removeID)
     printf("Game removed successfully\n");
 }
 
-// Display the wishlist
+// show all items
 void wishlist_display_contains(Wishlist *wishlist)
 {
     WishlistNode *temp = wishlist->head;
@@ -131,7 +131,7 @@ void wishlist_display_contains(Wishlist *wishlist)
     }
 }
 
-// No.of items in wishlist
+// get list size
 int wishlist_count(Wishlist *wishlist)
 {
     return wishlist->count;
@@ -155,7 +155,7 @@ void wishlist_clear(Wishlist *wishlist)
     wishlist->count = 0;
 }
 
-// destroy the wishlist
+// free wishlist mem
 void wishlist_destroy(Wishlist *wishlist)
 {
     if (wishlist == NULL)

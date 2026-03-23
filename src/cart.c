@@ -3,6 +3,7 @@
 #include "common.h"
 #include <stdlib.h>
 
+// init cart
 void cart_init(Cart *cart)
 {
     cart->head = NULL;
@@ -11,6 +12,7 @@ void cart_init(Cart *cart)
     cart->totalPrice = 0.0f;
 }
 
+// push game to cart
 void cart_add_game(Cart *cart, Game *game)
 {
     CartNode *newNode = (CartNode *)malloc(sizeof(CartNode));
@@ -38,6 +40,7 @@ void cart_add_game(Cart *cart, Game *game)
     }
 }
 
+// get by id
 CartNode *cart_search_by_id(Cart *cart, int ID)
 {
     if (cart == NULL || cart->head == NULL)
@@ -65,6 +68,7 @@ CartNode *cart_search_by_id(Cart *cart, int ID)
     return current;
 }
 
+// pop by id
 void cart_remove_by_id(Cart *cart, int removeID)
 {
     if (cart->head == NULL)
@@ -89,40 +93,43 @@ void cart_remove_by_id(Cart *cart, int removeID)
 
     if (prev == NULL)
     {
-
         cart->head = current->next;
+        if (cart->head != NULL) {
+            cart->head->prev = NULL;
+        }
     }
     else
     {
-
         prev->next = current->next;
+        if (current->next != NULL) {
+            current->next->prev = prev;
+        }
     }
-
 
     if (current == cart->tail)
     {
         cart->tail = prev;
     }
 
-
     cart->count--;
 
     free(current);
 }
 
+// count
 int cart_get_count(Cart *cart)
 {
     return cart->count;
 }
 
+// final cost
 float cart_get_total_price(Cart *cart)
 {
     float total = 0;
     CartNode *current = cart->head;
     if (current == NULL)
     {
-        printf("memory allocation failed");
-        return -1;
+        return 0.0f;
     }
 
     while (current != NULL)
@@ -131,15 +138,16 @@ float cart_get_total_price(Cart *cart)
         current = current->next;
     }
     cart->totalPrice = total;
-    free(current);
     return total;
 }
 
+// iter
 CartNode *cart_get_items(Cart *cart)
 {
     return cart->head;
 }
 
+// empty cart
 void cart_clear(Cart *cart)
 {
     CartNode *current = cart->head;
@@ -159,6 +167,7 @@ void cart_clear(Cart *cart)
     cart->totalPrice = 0;
 }
 
+// free cart mem
 void cart_destroy(Cart *cart)
 {
     if (cart == NULL)
@@ -166,5 +175,4 @@ void cart_destroy(Cart *cart)
         return;
     }
     cart_clear(cart);
-    free(cart);
 }

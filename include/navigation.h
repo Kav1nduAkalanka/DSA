@@ -7,6 +7,7 @@ typedef struct NavStackNode
     struct NavStackNode *next;
 } NavStackNode;
 
+// stack struct
 typedef struct NavStack
 {
     NavStackNode *top;
@@ -14,11 +15,11 @@ typedef struct NavStack
 
 } NavStack;
 
-void nav_init(NavStack *nav);
-void nav_push(NavStack *nav,Page page);
-void nav_pop(NavStack *nav);
-Page nav_peek(NavStack *nav);
-int nav_is_empty(NavStack *nav);
-void nav_destroy(NavStack *nav);
+void nav_init(NavStack *nav); // setup
+void nav_push(NavStack *nav,Page page); // nav forward
+void nav_pop(NavStack *nav); // nav back
+Page nav_peek(NavStack *nav); // curr page
+int nav_is_empty(NavStack *nav); // is top level
+void nav_destroy(NavStack *nav); // cleanup
  
 #endif

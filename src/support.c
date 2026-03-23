@@ -6,7 +6,7 @@
 
 
 
-//Add a ticket and sorting them according to the priority 
+// insert ticket by priority 
 void support_queue_submit_ticket(priorityQueue *q, int ticketID, char ticketTitle[], int priority)
 {
     supportNode *newNode = (supportNode *)malloc(sizeof(supportNode));
@@ -15,7 +15,7 @@ void support_queue_submit_ticket(priorityQueue *q, int ticketID, char ticketTitl
     newNode->priority = priority;
     newNode->next = NULL;
 
-    if(q->front == NULL || priority < q->front->priority)//The lowest value represent the highest priority
+    if(q->front == NULL || priority < q->front->priority) // lower val = higher priority
     {
         newNode->next = q->front;
         q->front = newNode;
@@ -30,7 +30,7 @@ void support_queue_submit_ticket(priorityQueue *q, int ticketID, char ticketTitl
         newNode->next = temp->next;
         temp->next = newNode;
     }
-    q->count++;  //Increase the count 
+    q->count++;  // ++ count 
 
     printf("\nAdded and sorted successfully\n");
     printf("Total Tickets: %d\n", q->count);
@@ -38,7 +38,7 @@ void support_queue_submit_ticket(priorityQueue *q, int ticketID, char ticketTitl
 
 
 
-//Inialize the support queue
+// init support queue
 void support_queue_initialize(priorityQueue *q)
 {
     q->count=0;
@@ -56,7 +56,7 @@ void support_queue_initialize(priorityQueue *q)
 
 
 
-//Remove the highest priority ticket first
+// pop highest priority ticket
 void support_queue_resolve_next(priorityQueue *q)
 {
     if(q->front == NULL)
@@ -68,12 +68,12 @@ void support_queue_resolve_next(priorityQueue *q)
         supportNode *temp = q->front;
         q->front = temp->next;
         free(temp);
-        q->count--;  // only decrement if a ticket is removed
+        q->count--;  // only dec on active pop
     }
 }
 
 
-//Display the details of next ticket
+// peek next ticket
 void support_queue_peek_next(priorityQueue *q)
 {
     if(q->front == NULL)
@@ -90,14 +90,14 @@ void support_queue_peek_next(priorityQueue *q)
 }
 
 
-//Get the count od queue
+// get queue size
 int support_queue_get_count(priorityQueue *q)
 {
     return q->count;
 }
 
 
-//Destory the 
+// clean queue mem
 void support_queue_destroy(priorityQueue *q)
 {
     supportNode *temp;

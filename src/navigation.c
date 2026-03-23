@@ -4,11 +4,13 @@
 #include "navigation.h"
 
 
+// init stack
 void nav_init(NavStack *nav)
 {
     nav->top = NULL;
     nav->stackCount = 0;
 }
+// is empty check
 int nav_is_empty(NavStack *nav)
 {
     if (nav == NULL || nav->top == NULL)
@@ -17,6 +19,7 @@ int nav_is_empty(NavStack *nav)
     }
     return 0;
 }
+// push route
 void nav_push(NavStack *nav, Page currentPage)
 {
     NavStackNode *newNode = (NavStackNode *)malloc(sizeof(NavStackNode));
@@ -30,6 +33,7 @@ void nav_push(NavStack *nav, Page currentPage)
     nav->stackCount++;
 }
 
+// pop route
 void nav_pop(NavStack *nav)
 {
     if (nav_is_empty(nav))
@@ -43,6 +47,7 @@ void nav_pop(NavStack *nav)
     nav->stackCount--;
 }
 
+// peek top page
 Page nav_peek(NavStack *nav)
 {
     if(nav_is_empty(nav)){
@@ -51,6 +56,7 @@ Page nav_peek(NavStack *nav)
     return nav->top->page;
 }
 
+// free nav
 void nav_destroy(NavStack *nav)
 {
 

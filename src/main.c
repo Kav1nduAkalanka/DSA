@@ -33,10 +33,9 @@ Nimsara -->
     --> gcc src.c -I include -o gamestore
     --> .\gamestore
 
-    **Priority queue implementation is not finished.but the logic is there.**
-
 */
-// implement download duplicate logic ( )
+
+// Game Store Entry Point
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -44,7 +43,7 @@ Nimsara -->
 #include <windows.h>
 #include <string.h>
 
-// MODULE header files
+// headers
 #include "common.h"
 #include "navigation.h"
 #include "catalog.h"
@@ -54,30 +53,25 @@ Nimsara -->
 #include "wishlist.h"
 #include "support.h"
 
-// helper functions for menus
-void show_main_menu(); // to display the main menu
+// core visual layouts
+void show_main_menu();
 
-// wishlist
+// sub-menus
 void handle_wishlist_menu(Wishlist *wishList, Cart *cart, Library *lib, NavStack *nav, Catalog *catalog);
 void display_wishlsit(Wishlist *wishlist);
 
-// downloads
 void display_downloads(DownloadQueue *dq);
 void handle_downloads_menu(DownloadQueue *dq, NavStack *nav);
 
-// library
 void handle_library_menu(Library *lib, DownloadQueue *dq, NavStack *nav);
 void display_library(Library *lib);
 
-// catalog
 void handle_catalog_menu(Catalog *catalog, Cart *cart, NavStack *nav, Wishlist *wishlist);
 void display_catalog(Catalog *catalog);
 
-// cart
-void handle_cart_menu(Cart *cart, Catalog *catalog, Library *lib, NavStack *nav);
+void handle_cart_menu(Cart *cart, Catalog *catalog, Library *lib, NavStack *nav, DownloadQueue *dq);
 void display_cart_menu(Cart *cart);
 
-// support
 void handle_support_menu(priorityQueue *q, NavStack *nav);
 void display_support(priorityQueue *q);
 
@@ -106,10 +100,11 @@ int main()
     priorityQueue pQueue;
     support_queue_initialize(&pQueue);
 
-    int running = 1;   // when exiting the program, running is set to 0 so the loop ends.
-    int userInput = 7; // enum of the PAGE_MAIN_MENU is 7.that is why we use 7 here,so the program starts with the main menu.
+    // loop config
+    int running = 1;
+    int userInput = 7;
 
-    // main loop
+    // render loop
     while (running && !nav_is_empty(&nav))
     {
         Page currentPage = nav_peek(&nav);
@@ -125,7 +120,7 @@ int main()
                 userInput = -1;
             }
 
-            // push new pages to the stack
+            // route navigation
             switch (userInput)
             {
             case 1:
@@ -160,7 +155,7 @@ int main()
             handle_catalog_menu(&catalog, &cart, &nav, &wishList);
             break;
         case PAGE_CART:
-            handle_cart_menu(&cart, &catalog, &library, &nav);
+            handle_cart_menu(&cart, &catalog, &library, &nav, &dQueue);
             break;
         case PAGE_LIBRARY:
             handle_library_menu(&library, &dQueue, &nav);
@@ -184,7 +179,7 @@ int main()
         }
     }
 
-    // free memory
+    // cleanup memory
     catalog_destroy(&catalog);
     cart_destroy(&cart);
     lib_destroy(&library);
@@ -222,7 +217,7 @@ void handle_catalog_menu(Catalog *catalog, Cart *cart, NavStack *nav, Wishlist *
     printf("1. Display Catalog\n");
     printf("2. Sort Catalog By Rating\n");
     printf("3. Sort Catalog By Price\n");
-    printf("4. Add Game to Library\n");
+    printf("4. Add Game to Cart\n");
     printf("5. Add Game to WishList\n");
     printf("0. Return to Main Menu\n\n");
     printf("Enter your choice: ");
@@ -240,19 +235,19 @@ void handle_catalog_menu(Catalog *catalog, Cart *cart, NavStack *nav, Wishlist *
         display_catalog(catalog); // Display catalog games
         system("pause");
         break;
-    case 2: // sort by rating
+    case 2: // by rating
         catalog_sort_by_rating(catalog);
         display_catalog(catalog);
         system("pause");
         break;
 
-    case 3: // sort by price
+    case 3: // by price
         catalog_sort_by_price(catalog);
         display_catalog(catalog);
         system("pause");
         break;
 
-    case 4: // Add a game from Catalog to cart
+    case 4: // to cart
     {
         display_catalog(catalog);
         printf("\nEnter Game ID to Add to Cart: ");
@@ -386,13 +381,17 @@ void handle_downloads_menu(DownloadQueue *dq, NavStack *nav)
     case 2:
         if (download_is_empty(dq))
         {
-            printf("Download queue is empty.");
-            break;
+            printf("Download queue is empty.\n");
         }
         else
         {
-            printf("Game removed from downloads queue.(%s)", dq->front->game.title);
-            download_dequeue(dq);
+            int removeID;
+            printf("Enter the Game ID to Remove: ");
+            if (scanf("%d", &removeID) == 1) {
+                download_remove_by_id(dq, removeID);
+            } else {
+                while (getchar() != '\n');
+            }
         }
         system("pause");
         break;
@@ -491,11 +490,15 @@ void handle_library_menu(Library *lib, DownloadQueue *dq, NavStack *nav)
 
             if (lib_is_id_contains(lib, gameID))
             {
-                Game *downloadGame = lib_get_game_data(lib, gameID);
-                if (downloadGame != NULL)
-                {
-                    download_enqueue(dq, downloadGame);
-                    printf("\n %s added to Download Queue.", downloadGame->title);
+                if (download_is_duplicate(dq, gameID)) {
+                    printf("\n %s is already in the Download Queue.\n", lib_get_game_data(lib, gameID)->title);
+                } else {
+                    Game *downloadGame = lib_get_game_data(lib, gameID);
+                    if (downloadGame != NULL)
+                    {
+                        download_enqueue(dq, downloadGame);
+                        printf("\n %s added to Download Queue.\n", downloadGame->title);
+                    }
                 }
             }
             else
@@ -567,6 +570,7 @@ void display_wishlsit(Wishlist *wishlist)
 
 void handle_wishlist_menu(Wishlist *wishList, Cart *cart, Library *lib, NavStack *nav, Catalog *catalog)
 {
+    (void)lib;
     int option = 0;
     int gameID = 0;
     system("cls");
@@ -597,7 +601,7 @@ void handle_wishlist_menu(Wishlist *wishList, Cart *cart, Library *lib, NavStack
         {
             printf("Enter the game ID to remove: ");
             scanf("%d", &gameID);
-            // future dev update: check if the id is valid or not before passing it to the function.
+            // validate future ids here
             wishlist_remove_item_by_id(wishList, gameID);
             printf("\ngame removed\n");
         }
@@ -608,7 +612,7 @@ void handle_wishlist_menu(Wishlist *wishList, Cart *cart, Library *lib, NavStack
         printf("Enter the game ID to Add to The Cart: ");
         scanf("%d", &gameID);
 
-        // Fetch the game from the wishlist
+        // get game obj
         Game *gameToBuy = wishlist_search_game_by_id(wishList, gameID);
 
         if (gameToBuy != NULL)
@@ -687,7 +691,7 @@ void display_cart_menu(Cart *cart)
     printf("Total Price: $%.2f\n\n", cart_get_total_price(cart));
 }
 
-void handle_cart_menu(Cart *cart, Catalog *catalog, Library *lib, NavStack *nav)
+void handle_cart_menu(Cart *cart, Catalog *catalog, Library *lib, NavStack *nav, DownloadQueue *dq)
 {
     int option = 0;
     int gameID = 0;
@@ -761,6 +765,9 @@ void handle_cart_menu(Cart *cart, Catalog *catalog, Library *lib, NavStack *nav)
             while (current != NULL)
             {
                 lib_add_game(lib, &current->game);
+                if (!download_is_duplicate(dq, current->game.gameID)) {
+                    download_enqueue(dq, &current->game);
+                }
                 current = current->next;
             }
 

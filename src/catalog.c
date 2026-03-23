@@ -20,7 +20,7 @@ void catalog_add_game(Catalog *catalog, int id, const char *title, float price, 
     printf("game added(%d)\n", catalog->gameCount);
 }
 
-// initialization of the catalog
+// setup catalog
 void catalog_init(Catalog *catalog)
 {
     catalog->gameCount = 0;
@@ -46,7 +46,7 @@ void catalog_init(Catalog *catalog)
     catalog_add_game(catalog, 120, "Ready or Not", 49.99, 4.7, 50);
 }
 
-// returns the memory address of the first game in the array
+// get catalog head
 Game *catalog_get_game(Catalog *catalog)
 {
     return catalog->games;
@@ -92,7 +92,7 @@ void catalog_sort_by_rating(Catalog *catalog)
         Game key = games[i];
         int j = i - 1;
 
-        while (j >= 0 && games[j].rating > key.rating)
+        while (j >= 0 && games[j].rating < key.rating)
         {
             games[j + 1] = games[j];
             j = j - 1;

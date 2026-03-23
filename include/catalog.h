@@ -8,12 +8,12 @@ typedef struct
     int gameCount;
 } Catalog;
 
-void catalog_init(Catalog *catalog); //initialize the catalog
-Game *catalog_get_game(Catalog *catalog); //returns the first game's memory address 
-void catalog_sort_by_price(Catalog *catalog); //sorts the catalog by price using insertion sort
-void catalog_sort_by_rating(Catalog *catalog); //sorts the catalog by rating using insertion sort
-Game *catalog_search_by_id(Catalog *catalog,int id); //searches the catalog by the gameID .if game found returns a pointer to the game if not returns null
-int catalog_get_count(Catalog *catalog); // returns the number of games in the  catalog
-void catalog_destroy(Catalog *catalog); //free the memory allocated for catalog
+void catalog_init(Catalog *catalog); // init db
+Game *catalog_get_game(Catalog *catalog); // get node
+void catalog_sort_by_price(Catalog *catalog); // auto-sort price
+void catalog_sort_by_rating(Catalog *catalog); // auto-sort score
+Game *catalog_search_by_id(Catalog *catalog,int id); // fetch query
+int catalog_get_count(Catalog *catalog); // get size
+void catalog_destroy(Catalog *catalog); // free stack
 
 #endif

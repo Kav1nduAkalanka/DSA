@@ -2,14 +2,14 @@
 #define SUPPORT_H
 #include<stdio.h>
 
-#define MAX_TITLE_LENGHTH 100 // Max length of the support title
-#define MAX_SUPPORT_LIST 10  // Total no.of support titles
+#define MAX_TITLE_LENGHTH 100 // max string len
+#define MAX_SUPPORT_LIST 10  // max elements
 
 typedef struct supportNode
 {
     int ticketId;
     char supportTitle[MAX_TITLE_LENGHTH];
-    int priority; //Low number gets the highest priority
+    int priority; // 1 = highest tier
     struct supportNode *next;
 
 } supportNode;

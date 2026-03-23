@@ -56,7 +56,7 @@ int lib_game_index(Library *library, int id)
     return -1;
 }
 
-// returns the index of the game
+// get index
 int lib_is_id_contains(Library *library, int id)
 {
     if (lib_game_index(library, id) != -1)
@@ -68,7 +68,7 @@ int lib_is_id_contains(Library *library, int id)
 
 void lib_remove_game_by_id(Library *library, int id)
 {
-    int index = lib_is_id_contains(library, id);
+    int index = lib_game_index(library, id);
     if (index == -1)
     {
         return;
