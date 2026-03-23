@@ -3,12 +3,7 @@
 #include <stdlib.h>
 #include "navigation.h"
 
-/*NavStackNode *nav_create_node(Page currentPage)
-{
-    NavStackNode *newNode = ;
 
-    return newNode;
-}*/
 void nav_init(NavStack *nav)
 {
     nav->top = NULL;

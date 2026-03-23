@@ -67,45 +67,45 @@ CartNode *cart_search_by_id(Cart *cart, int ID)
 
 void cart_remove_by_id(Cart *cart, int removeID)
 {
-    CartNode *current = cart_search_by_id(cart, removeID);
+    if (cart->head == NULL)
+        return;
+
+    CartNode *current = cart->head;
+    CartNode *prev = NULL;
+
+
+    while (current != NULL && current->game.gameID != removeID)
+    {
+        prev = current;
+        current = current->next;
+    }
+
+
     if (current == NULL)
     {
         return;
     }
 
-    // if the node to remove is head
-    if (current == cart->head)
+
+    if (prev == NULL)
     {
+
         cart->head = current->next;
-
-        // if there is a another node
-        if (cart->head != NULL)
-        {
-            cart->head->prev = NULL;
-        }
-        else
-        {
-            cart->tail = NULL;
-        }
     }
-
-    // remove from tail
-    else if (current == cart->tail)
-    {
-        cart->tail = current->prev;
-
-        if (cart->tail != NULL)
-        {
-            cart->tail->next = NULL;
-        }
-    }
-
-    // remove from the middle
     else
     {
-        current->prev->next = current->next;
-        current->next->prev = current->prev;
+
+        prev->next = current->next;
     }
+
+
+    if (current == cart->tail)
+    {
+        cart->tail = prev;
+    }
+
+
+    cart->count--;
 
     free(current);
 }
