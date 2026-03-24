@@ -571,7 +571,7 @@ void handle_wishlist_menu(Wishlist *wishList, Cart *cart, Library *lib, NavStack
     int gameID = 0;
     system("cls");
 
-    printf("\n=== CART MENU ===\n");
+    printf("\n=== WishList ===\n");
     printf("1. View Wishlist\n");
     printf("2. Remove Game From Wishlist\n");
     printf("3. Add Game To Cart\n");
