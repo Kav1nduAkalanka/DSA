@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// The header file defined for the donwload manager
+
 
 // Initializes the download queue by setting pointers to NULL
 void download_init_queue(DownloadQueue *queue)
